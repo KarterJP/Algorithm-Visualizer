@@ -1,0 +1,77 @@
+@media (min-width:320px)  { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
+@media (min-width:480px)  { /* smartphones, Android phones, landscape iPhone */ }
+@media (min-width:600px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+#banner {
+	width: 50%;
+  height: auto;
+}
+
+body {
+  background-image: url("images/Background.jpg");
+  background-color: #cccccc;
+	margin: 5px;
+	min-width: 1200px;
+}
+
+.content {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	padding: 10px;
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 100px; /* height of your footer */
+}
+
+.tablecontent {
+  overflow: hidden;
+  background-color: #8cc63f;
+}
+
+.tablecontent a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-weight: bold;
+	font-size: 1.5em;
+}
+
+.tablecontent a.left {
+	float: left;
+}
+
+.tablecontent a.right {
+	float: right;
+}
+
+.tablecontent a:hover {
+  background-color: #373737;
+  color: white;
+}
+
+input {
+	display: inline-block;
+	text-align: left;
+	float: none;
+}
+
+.container {
+	border-style: onset;
+	border-color: white;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	margin-left: 1px;
+	margin-right: 10px;
+	padding: 1 px;
+	width: 10%;
+	font-weight: bold;
+}
