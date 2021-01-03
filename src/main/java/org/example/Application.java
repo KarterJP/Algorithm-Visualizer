@@ -86,11 +86,6 @@ public class Application extends AbstractHandler
             response.setContentType("application/javascript;charset=utf-8");
             response.getWriter().println(loadFile(uri));
         }
-        else if (uri.endsWith(".pdf")) // Requesting JavaScript
-        {
-            response.setContentType("application/pdf");
-            response.getWriter().println(loadFile("uri"));
-        }
         else
         {
             response.getWriter().println(INDEX_HTML);
