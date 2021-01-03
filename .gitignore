@@ -1,3 +1,4 @@
 src/main/resources/images/
 src/main/resources/js/jQuery.js
 *.log
+.ebextensions
