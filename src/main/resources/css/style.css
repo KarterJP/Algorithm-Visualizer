@@ -11,10 +11,15 @@
 }
 
 body {
-  background-image: url("images/Background.jpg");
   background-color: #cccccc;
 	margin: 5px;
 	min-width: 1200px;
+}
+
+.heading {
+	text-align: center;
+	font-size: 1.75em;
+	font-family: sans-serif;
 }
 
 .navbar {
@@ -78,7 +83,7 @@ body {
   display: block;
 }
 
-.content {
+#content {
 	margin: 10px;
 	padding: 15px;
   min-height: 100vh;
