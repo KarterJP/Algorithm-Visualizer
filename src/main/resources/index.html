@@ -6,27 +6,31 @@
 	<title>Algorithms</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jQuery.js"></script>
+	<script src="js/ocanvas-2.10.0.js"></script>
 	<script src="js/script.js"></script>
 </head>
 <body>
-	<div class="navbar">
-		<div class="dropdown">
-		   <button class="dropbtn">Sorting
-		     <i class="caret-down">&#9660;</i>
-		   </button>
-		   <div class="dropdown-content">
-	      <a href="#" id="bubbleSort">Bubble Sort</a>
-	    </div>
-	  </div>
-	</div>
+	<div class="container">
+		<div class="navbar">
+			<div class="dropdown">
+			   <button class="dropbtn">Sorting
+			     <i class="caret-down">&#9660;</i>
+			   </button>
+			   <div class="dropdown-content">
+		      <a href="#" id="bubbleSort">Bubble Sort</a>
+		    </div>
+		  </div>
+		</div>
 
-	<div class="content">
-		<h1 class="welcome">Welcome to Algorithm Visualizer!</h1>
-		<h4 class="welcome">To get started, select any of the options from the categories above.</h4>
-	</div>
+		<div class="content">
+			<h4 class="heading">To get started, select any of the options from the categories above.</h4>
+		</div>
 
-	<div class="footer">
-		<p>Made by Karter Phillips</p>
+		<canvas id="canvas" width="800" height="500"></canvas>
+
+		<div class="footer">
+			<p>Made by Karter Phillips</p>
+		</div>
 	</div>
 
 </body>
