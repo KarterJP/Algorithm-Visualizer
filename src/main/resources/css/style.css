@@ -83,14 +83,14 @@ body {
   display: block;
 }
 
-#content {
+.content {
 	margin: 10px;
 	padding: 15px;
   min-height: 100vh;
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 100px;
+  padding-bottom: 2em;
 }
 
 .welcome {
@@ -104,4 +104,16 @@ h1.welcome {
 
 h4.welcome {
 	font-size: 1.75em;
+}
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+	overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+  color: white;
+  text-align: center;
 }

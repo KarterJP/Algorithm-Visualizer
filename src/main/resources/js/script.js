@@ -11,7 +11,7 @@ $(document).ready(function()
 
 function clearContent ()
 {
-  $("#content").empty();
+  $(".content").empty();
 }
 
 function doBubbleSort ()
@@ -19,5 +19,5 @@ function doBubbleSort ()
   clearContent();
   type = "sorting";
   algo = "bubbleSort";
-  $("#content").html("<h1 class='heading'>Bubble Sort</h1>");
+  $(".content").html("<h1 class='heading'>Bubble Sort</h1>");
 }
