@@ -2,7 +2,6 @@ var type = null;
 var algorithm = null;
 var canvas;
 
-
 $(document).ready(function()
 {
   $("#bubbleSort").click(function(e) {
@@ -17,7 +16,6 @@ oCanvas.domReady(function() {
     background: "#0cc"
   });
 
-
   for (var i = 5; i < canvas.width; i+=10)
   {
     var line = canvas.display.line({
@@ -28,9 +26,6 @@ oCanvas.domReady(function() {
     });
     canvas.addChild(line);
   }
-
-
-
 });
 
 function clearContent ()
@@ -42,7 +37,10 @@ function bubbleSort ()
 {
   type = "sorting";
   algorithm = "Bubble Sort";
-
   $(".heading").html(algorithm);
+}
+
+function start()
+{
 
 }
