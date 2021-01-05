@@ -109,6 +109,10 @@ body {
 	background-color: green;
 }
 
+#stop:hover {
+	background-color: red;
+}
+
 #canvas {
 	display: block;
 	padding-bottom: 1em;
