@@ -1,7 +1,19 @@
-var type = null;
-var algorithm = null;
-var fps = 3;
 var canvas;
+var fps = 30;
+var lines = [];
+var label;
+
+const algorithms = {
+  SORTING: {
+		BUBBLESORT: "Bubble Sort",
+		QUICKSORT: "QuickSort",
+	},
+	WINTER: "winter",
+	SPRING: "spring",
+	AUTUMN: "autumn",
+}
+
+var algorithm = algorithms.SORTING.BUBBLESORT;
 var isRunning = false;
 
 $(document).ready(function()
@@ -9,8 +21,7 @@ $(document).ready(function()
   $("#bubbleSort").click(function(e) {
     e.preventDefault();
     type = "sorting";
-    algorithm = 0;
-    $(".heading").html("Bubble Sort");
+    algorithm = algorithms.SORTING.BUBBLESORT;
   });
 });
 
@@ -18,25 +29,36 @@ oCanvas.domReady(function() {
   canvas = oCanvas.create({
     canvas: "#canvas",
     background: "#0cc",
-    drawEachFrame: false,
+    drawEachFrame: true,
     fps: fps
   });
+
+  label = canvas.display.text({
+  	x: 10,
+  	y: 10,
+  	origin: { x: "left", y: "top" },
+  	font: "bold 30px sans-serif",
+  	text: algorithm,
+  	fill: "#333"
+  });
+  canvas.addChild(label);
 
   for (var i = 49; i < canvas.width-49; i+=50)
   {
     var line = canvas.display.line({
-    	start: { x: i, y: Math.random()*(canvas.height-50)+25 },
+    	start: { x: i, y: Math.random()*(canvas.height-50)+100 },
     	end: { x: i, y: canvas.height },
     	stroke: "25px #333",
     	cap: "round"
     });
     canvas.addChild(line);
+    lines.push(line);
   }
 });
 
 function start()
 {
-  if (algorithm == 0)
+  if (algorithm === algorithms.SORTING.BUBBLESORT)
   {
     bubbleSort();
   }
@@ -50,7 +72,7 @@ function stop()
 async function bubbleSort ()
 {
   isRunning = true;
-  var n = canvas.children.length;
+  var n = lines.length;
 
   for (var i = 0; i < n-1; i++) {
     for (var j = 0; j < n-i-1; j++)
@@ -59,26 +81,36 @@ async function bubbleSort ()
         return;
       }
 
-      canvas.children[j].stroke = "25px #0f0";
+      lines[j].stroke = "25px #0f0";
+      canvas.redraw();
+      await sleep(1000);
 
-      if (canvas.children[j].length > canvas.children[j+1].length)
+      if (lines[j].length > lines[j+1].length)
       {
         moveForward(j);
       }
-      await sleep(1000);
-      canvas.children[j].stroke = "25px #333";    }
+      else
+      {
+        lines[j].stroke = "25px #333";
+        lines[j+1].stroke = "25px #0f0";
+        canvas.redraw();
+      }
+      lines[j].stroke = "25px #333";
+      canvas.redraw();
+    }
+    await sleep(1000);
   }
   isRunning = false;
 }
 
 function moveForward (j)
 {
-  canvas.children[j].x += 50;
-  canvas.children[j+1].x -= 50;
+  lines[j].x += 50;
+  lines[j+1].x -= 50;
 
-  var temp = canvas.children[j];
-  canvas.children[j] = canvas.children[j+1];
-  canvas.children[j+1] = temp;
+  var temp = lines[j];
+  lines[j] = lines[j+1];
+  lines[j+1] = temp;
 
   canvas.redraw();
 }
