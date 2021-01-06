@@ -4,35 +4,51 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Algorithms</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/jQuery.js"></script>
-	<script src="js/ocanvas-2.10.0.js"></script>
-	<script src="js/script.js"></script>
 </head>
 <body>
 	<div class="container">
-		<div class="navbar">
-			<div class="dropdown">
-			   <button class="dropbtn">Sorting
-			     <i class="caret-down">&#9660;</i>
-			   </button>
-			   <div class="dropdown-content">
-		      <a href="#" id="bubbleSort">Bubble Sort</a>
-		    </div>
-		  </div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Algorithms</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sorting
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" id="bubble-sort">Bubble Sort</a>
+        </div>
+      </li>
+  </div>
+</nav>
+
+		<div class="row">
+			<h4 class="heading col-md-12 align-middle">Select any of the options from the categories above.</h4>
 		</div>
 
-		<div class="content">
-			<h4 class="heading">Select any of the options from the categories above.</h4>
+		<div class="panel panel-default justify-content-center">
+			<button class="panel-heading" id="start" onclick="start();">Start</button>
+			<div class="panel-body">
+				<canvas id="canvas" width="800" height="500"></canvas>
+			</div>
 		</div>
 
-		<button class="controls" id="start" onclick="start();">Start</button>
-		<canvas id="canvas" width="800" height="500"></canvas>
-
-		<div class="footer">
-			<p>Made by Karter Phillips</p>
-		</div>
+		<footer>
+			<div class="row text-center">
+					<p class="col-md-12 text-light footer-text">Made by Karter Phillips</p>
+			</div>
+		<footer>
 	</div>
 
+	<script src="js/jQuery.js"></script>
+	<script src="js/bootstrap.bundle.js"></script>
+	<script src="js/ocanvas-2.10.0.js"></script>
+	<script src="js/script.js"></script>
 </body>
 </html>

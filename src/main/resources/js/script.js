@@ -8,9 +8,6 @@ const algorithms = {
 		BUBBLESORT: "Bubble Sort",
 		QUICKSORT: "QuickSort",
 	},
-	WINTER: "winter",
-	SPRING: "spring",
-	AUTUMN: "autumn",
 }
 
 var algorithm = algorithms.SORTING.BUBBLESORT;
@@ -18,6 +15,10 @@ var isRunning = false;
 
 $(document).ready(function()
 {
+  $("#sortingDropdown").click(function(e) {
+    e.preventDefault();
+  });
+
   $("#bubbleSort").click(function(e) {
     e.preventDefault();
     type = "sorting";
