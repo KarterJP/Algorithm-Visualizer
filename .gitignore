@@ -3,3 +3,4 @@ src/main/resources/js/jQuery.js
 src/main/resources/js/ocanvas-2.10.0.js
 *.log
 .ebextensions
+bootstrap.bundle.js
