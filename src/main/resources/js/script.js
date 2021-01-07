@@ -94,11 +94,13 @@ function resetProgress()
 {
   iProgress = 0;
   jProgress = 0;
+  i = 0;
+  j = 0;
 }
 
 async function bubbleSort ()
 {
-  
+
   isRunning = true;
   var n = lines.length;
 
