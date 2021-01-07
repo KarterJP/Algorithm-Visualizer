@@ -22,7 +22,8 @@ body {
   position: relative;
 }
 
-.panel {
+.d-flex {
+  border:1px solid #000000;
 }
 
 .controls {
@@ -35,9 +36,8 @@ body {
 }
 
 #start {
+  background-color: #090;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	width: 50%;
 	padding: 10px 10px;
 }
@@ -46,14 +46,17 @@ body {
 	background-color: green;
 }
 
+#stop {
+  background-color: #ff2929;
+  padding: 10px 10px;
+}
+
 #stop:hover {
 	background-color: red;
 }
 
 #canvas {
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
 	width: 50%;
 }
 
