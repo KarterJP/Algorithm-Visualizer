@@ -18,10 +18,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="sorting-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sorting
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="sorting-dropdown">
           <a class="dropdown-item" href="#" id="bubble-sort">Bubble Sort</a>
         </div>
       </li>
@@ -32,10 +32,18 @@
 			<h4 class="heading col-md-12 align-middle">Select any of the options from the categories above.</h4>
 		</div>
 
-		<div class="panel panel-default justify-content-center">
-			<button class="panel-heading" id="start" onclick="start();">Start</button>
-			<div class="panel-body">
-				<canvas id="canvas" width="800" height="500"></canvas>
+		<div class="d-flex">
+			<div class="flex-column">
+				<div class="flex-row">
+					<button id="start" onclick="start();">Start</button>
+				</div>
+				<div class="flex-row">
+					<canvas id="canvas" width="800" height="500"></canvas>
+				</div>
+				<div class="flex-row">
+					<button id="stop" onclick="stop();">Stop</button>
+					<button id="reset" onclick="init();">Reset</button>
+				</div>
 			</div>
 		</div>
 

@@ -2,6 +2,7 @@ var canvas;
 var fps = 30;
 var lines = [];
 var label;
+var iProgress = 0, jProgress = 0, i, j;
 
 const algorithms = {
   SORTING: {
@@ -13,20 +14,37 @@ const algorithms = {
 var algorithm = algorithms.SORTING.BUBBLESORT;
 var isRunning = false;
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 $(document).ready(function()
 {
-  $("#sortingDropdown").click(function(e) {
+  $("#sorting-dropdown").click(function(e) {
     e.preventDefault();
   });
 
-  $("#bubbleSort").click(function(e) {
+  $("#bubble-sort").click(function(e) {
     e.preventDefault();
+    init();
     type = "sorting";
     algorithm = algorithms.SORTING.BUBBLESORT;
   });
 });
 
 oCanvas.domReady(function() {
+  init();
+});
+
+function init() {
+  stop();
+  resetProgress();
+  if (canvas != null)
+  {
+    canvas.destroy();
+    lines.length = 0;
+  }
+
   canvas = oCanvas.create({
     canvas: "#canvas",
     background: "#0cc",
@@ -44,18 +62,18 @@ oCanvas.domReady(function() {
   });
   canvas.addChild(label);
 
-  for (var i = 49; i < canvas.width-49; i+=50)
+  for (var k = 49; k < canvas.width-49; k+=50)
   {
     var line = canvas.display.line({
-    	start: { x: i, y: Math.random()*(canvas.height-50)+100 },
-    	end: { x: i, y: canvas.height },
+    	start: { x: k, y: Math.random()*(canvas.height-150)+100 },
+    	end: { x: k, y: canvas.height },
     	stroke: "25px #333",
     	cap: "round"
     });
     canvas.addChild(line);
     lines.push(line);
   }
-});
+}
 
 function start()
 {
@@ -67,24 +85,38 @@ function start()
 
 function stop()
 {
+  iProgress = i;
+  jProgress = j;
   isRunning = false;
+}
+
+function resetProgress()
+{
+  iProgress = 0;
+  jProgress = 0;
 }
 
 async function bubbleSort ()
 {
+  
   isRunning = true;
   var n = lines.length;
 
-  for (var i = 0; i < n-1; i++) {
-    for (var j = 0; j < n-i-1; j++)
+  if (i >= n-1 && j >= n-i-1)
+  {
+    init();
+  }
+
+  for (i = iProgress; i < n-1; i++) {
+    for (j = jProgress; j < n-i-1; j++)
     {
+      lines[j].stroke = "25px #0f0";
+      canvas.redraw();
+      await sleep(500);
+
       if (isRunning === false) {
         return;
       }
-
-      lines[j].stroke = "25px #0f0";
-      canvas.redraw();
-      await sleep(1000);
 
       if (lines[j].length > lines[j+1].length)
       {
@@ -99,8 +131,10 @@ async function bubbleSort ()
       lines[j].stroke = "25px #333";
       canvas.redraw();
     }
-    await sleep(1000);
+    jProgress = 0;
+    await sleep(500);
   }
+  iProgress = 0;
   isRunning = false;
 }
 
@@ -114,8 +148,4 @@ function moveForward (j)
   lines[j+1] = temp;
 
   canvas.redraw();
-}
-
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
