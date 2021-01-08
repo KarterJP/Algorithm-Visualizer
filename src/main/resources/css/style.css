@@ -10,6 +10,12 @@ body {
 	margin: 5px;
 }
 
+button {
+  border-width: 1px 2px 1px 2px;
+  border-style: solid;
+  border-color: #333;
+}
+
 .heading {
 	text-align: center;
 	font-size: 1.75em;
@@ -38,37 +44,22 @@ body {
 }
 
 #start {
-  background-color: #090;
-	display: block;
 	width: 100%;
 	padding: 10px 10px;
 }
 
-#start:hover {
-	background-color: green;
-}
-
 #stop {
-  background-color: #ff2929;
   padding: 10px 10px;
-}
-
-#stop:hover {
-	background-color: red;
 }
 
 #reset {
   padding: 10px 10px;
-  background-color: #f66;
-}
-
-#reset:hover {
-  background-color: #f44;
 }
 
 #canvas {
 	display: block;
 	width: 100%;
+  border: 2px solid #333;
 }
 
 footer {

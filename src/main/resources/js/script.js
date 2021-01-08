@@ -47,7 +47,7 @@ function init() {
 
   canvas = oCanvas.create({
     canvas: "#canvas",
-    background: "#0cc",
+    background: "#EDF5E1",
     drawEachFrame: true,
     fps: fps
   });
@@ -118,7 +118,7 @@ async function bubbleSort ()
   for (i = iProgress; i < n-1; i++) {
     for (j = jProgress; j < n-i-1; j++)
     {
-      lines[j].stroke = "25px #0f0";
+      lines[j].stroke = "25px #28a745";
       canvas.redraw();
       await sleep(500);
 
@@ -133,7 +133,7 @@ async function bubbleSort ()
       else
       {
         lines[j].stroke = "25px #333";
-        lines[j+1].stroke = "25px #0f0";
+        lines[j+1].stroke = "25px #28a745";
         canvas.redraw();
       }
       lines[j].stroke = "25px #333";
