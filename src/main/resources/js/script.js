@@ -88,6 +88,7 @@ function stop()
   iProgress = i;
   jProgress = j;
   isRunning = false;
+  $("#start").prop("disabled", false);
 }
 
 function resetProgress()
@@ -102,6 +103,7 @@ async function bubbleSort ()
 {
 
   isRunning = true;
+  $("#start").prop("disabled", true);
   var n = lines.length;
 
   if (i >= n-1 && j >= n-i-1)
@@ -137,7 +139,7 @@ async function bubbleSort ()
     await sleep(500);
   }
   iProgress = 0;
-  isRunning = false;
+  stop();
 }
 
 function moveForward (j)
