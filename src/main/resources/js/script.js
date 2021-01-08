@@ -1,15 +1,12 @@
 var canvas;
-var fps = 30;
-var speed = 500;
-var lines = [];
 var label;
+var fps = 30;
+var lines = [];
 var iProgress = 0, jProgress = 0, i, j;
 
 const algorithms = {
-  SORTING: {
 		BUBBLESORT: "Bubble Sort",
 		QUICKSORT: "QuickSort",
-	},
 }
 
 const speeds = {
@@ -19,7 +16,8 @@ const speeds = {
   SUPERSONIC: 100,
 }
 
-var algorithm = algorithms.SORTING.BUBBLESORT;
+var speed = speeds.NORMAL;
+var algorithm = algorithms.BUBBLESORT;
 var isRunning = false;
 
 const sleep = (milliseconds) => {
@@ -28,6 +26,10 @@ const sleep = (milliseconds) => {
 
 $(document).ready(function()
 {
+  $("#navbar-brand").click(function(e) {
+    e.preventDefault();
+  });
+
   $("#sorting-dropdown").click(function(e) {
     e.preventDefault();
   });
@@ -36,7 +38,7 @@ $(document).ready(function()
     e.preventDefault();
     init();
     type = "sorting";
-    algorithm = algorithms.SORTING.BUBBLESORT;
+    algorithm = algorithms.BUBBLESORT;
   });
 
   $("#speed").change(function(e) {
@@ -102,7 +104,14 @@ function init() {
 
 function start()
 {
-  if (algorithm === algorithms.SORTING.BUBBLESORT)
+  switch (algorithm)
+  {
+    case algorithm.BUBBLESORT: bubbleSort();
+                              break;
+  }
+
+
+  if (algorithm === algorithms.BUBBLESORT)
   {
     bubbleSort();
   }
@@ -132,13 +141,14 @@ function resetProgress()
 
 async function bubbleSort ()
 {
-  running();
   var n = lines.length;
 
   if (i >= n-1 && j >= n-i-1)
   {
     init();
   }
+
+  running();
 
   for (i = iProgress; i < n-1; i++) {
     for (j = jProgress; j < n-i-1; j++)
@@ -167,6 +177,8 @@ async function bubbleSort ()
     jProgress = 0;
     await sleep(speed);
   }
+  lines[j-1].stroke = "25px #28a745";
+  canvas.redraw();
   iProgress = 0;
   stop();
 }
