@@ -1,5 +1,6 @@
 var canvas;
 var fps = 30;
+var speed = 500;
 var lines = [];
 var label;
 var iProgress = 0, jProgress = 0, i, j;
@@ -9,6 +10,13 @@ const algorithms = {
 		BUBBLESORT: "Bubble Sort",
 		QUICKSORT: "QuickSort",
 	},
+}
+
+const speeds = {
+  SLOW: 1000,
+  NORMAL: 500,
+  FAST: 250,
+  SUPERSONIC: 100,
 }
 
 var algorithm = algorithms.SORTING.BUBBLESORT;
@@ -29,6 +37,23 @@ $(document).ready(function()
     init();
     type = "sorting";
     algorithm = algorithms.SORTING.BUBBLESORT;
+  });
+
+  $("#speed").change(function(e) {
+    e.preventDefault();
+    var newSpeed;
+    switch (this.value)
+    {
+      case "slow": newSpeed = speeds.SLOW;
+      break;
+      case "normal": newSpeed = speeds.NORMAL;
+      break;
+      case "fast": newSpeed = speeds.FAST;
+      break;
+      case "supersonic": newSpeed = speeds.SUPERSONIC;
+      break;
+    }
+    speed = newSpeed;
   });
 });
 
@@ -120,7 +145,7 @@ async function bubbleSort ()
     {
       lines[j].stroke = "25px #28a745";
       canvas.redraw();
-      await sleep(500);
+      await sleep(speed);
 
       if (isRunning === false) {
         return;
@@ -140,7 +165,7 @@ async function bubbleSort ()
       canvas.redraw();
     }
     jProgress = 0;
-    await sleep(500);
+    await sleep(speed);
   }
   iProgress = 0;
   stop();
@@ -149,6 +174,7 @@ async function bubbleSort ()
 function moveForward (j)
 {
   lines[j].x += 50;
+
   lines[j+1].x -= 50;
 
   var temp = lines[j];

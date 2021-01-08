@@ -7,30 +7,27 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Algorithms</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+		  <a class="navbar-brand" href="#">Algorithms</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="sorting-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sorting
-        </a>
-        <div class="dropdown-menu" aria-labelledby="sorting-dropdown">
-          <a class="dropdown-item" href="#" id="bubble-sort">Bubble Sort</a>
-        </div>
-      </li>
-  </div>
-</nav>
-
-		<div class="row">
-			<h4 class="heading col-md-12 align-middle">Select any of the options from the categories above.</h4>
-		</div>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="sorting-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Sorting
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="sorting-dropdown">
+		          <a class="dropdown-item" href="#" id="bubble-sort">Bubble Sort</a>
+		        </div>
+		      </li>
+		  </div>
+		</nav>
 
 		<div class="d-flex">
 			<div class="flex-column">
@@ -40,9 +37,16 @@
 				<div class="flex-row">
 					<canvas id="canvas" width="800" height="500"></canvas>
 				</div>
-				<div class="flex-row">
-					<button class="bg-danger rounded-bottom" id="stop" onclick="stop();">Stop</button>
-					<button class="bg-danger rounded-bottom" id="reset" onclick="init();">Reset</button>
+				<div class="flex-row rounded-bottom" id="bottom-row">
+					<button class="bg-danger" id="stop" onclick="stop();">Stop</button>
+					<button class="bg-danger" id="reset" onclick="init();">Reset</button>
+					<select class="form-control" id="speed">
+						<option id="select-label" selected="selected">Speed</option>
+						<option value="slow">Slow</option>
+					  <option value="normal">Normal</option>
+						<option value="fast">Fast</option>
+						<option value="supersonic">Supersonic</option>
+					</select>
 				</div>
 			</div>
 		</div>
