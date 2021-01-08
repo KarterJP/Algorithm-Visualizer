@@ -132,13 +132,14 @@ function resetProgress()
 
 async function bubbleSort ()
 {
-  running();
   var n = lines.length;
 
   if (i >= n-1 && j >= n-i-1)
   {
     init();
   }
+
+  running();
 
   for (i = iProgress; i < n-1; i++) {
     for (j = jProgress; j < n-i-1; j++)
@@ -167,6 +168,8 @@ async function bubbleSort ()
     jProgress = 0;
     await sleep(speed);
   }
+  lines[j-1].stroke = "25px #28a745";
+  canvas.redraw();
   iProgress = 0;
   stop();
 }
