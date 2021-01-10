@@ -37,25 +37,14 @@
 		  </div>
 		</nav>
 
-		<div class="d-flex">
-			<div class="flex-column">
-				<div class="flex-row">
-					<button class="bg-success rounded-top" id="start" onclick="start();">Start</button>
-				</div>
-				<div class="flex-row">
-					<canvas id="canvas" width="800" height="500"></canvas>
-				</div>
-				<div class="flex-row rounded-bottom" id="bottom-row">
-					<button class="bg-danger" id="stop" onclick="stop();">Stop</button>
-					<button class="bg-danger" id="reset" onclick="init();">Reset</button>
-					<select class="form-control" id="speed">
-						<option id="select-label" selected="selected">Speed</option>
-						<option value="slow">Slow</option>
-					  <option value="normal">Normal</option>
-						<option value="fast">Fast</option>
-						<option value="supersonic">Supersonic</option>
-					</select>
-				</div>
+		<div class="content">
+			<h3 id="title">Welcome to my Algorithm Visualizer!</h3>
+			<div id="about">
+				<p>The goal of this project is two-fold.
+					The first and most important goal is to improve my understanding of algorithms and concepts:
+					by taking an algorithm and implementing it myself, I will be forced to research until I am fully comfortable with it.
+					As well, the painstaking process of slowing it down and simulating it step by step should ensure a full understanding of how it operates.</p>
+				<p>The second goal of this project is to further refine my skills in JavaScript, HTML/CSS, AWS, Java, and websites and webservers.</p>
 			</div>
 		</div>
 
