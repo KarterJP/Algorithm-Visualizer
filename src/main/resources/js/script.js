@@ -6,7 +6,12 @@ var iProgress = 0, jProgress = 0, i, j;
 
 const algorithms = {
 		BUBBLESORT: "Bubble Sort",
-		QUICKSORT: "QuickSort",
+		LINEARSEARCH: "Linear Search",
+}
+
+const types = {
+	SORT: 0,
+	SEARCH: 1,
 }
 
 const speeds = {
@@ -17,6 +22,7 @@ const speeds = {
 }
 
 var speed = speeds.NORMAL;
+var type = types.SORT;
 var algorithm = algorithms.BUBBLESORT;
 var isRunning = false;
 
@@ -34,11 +40,22 @@ $(document).ready(function()
     e.preventDefault();
   });
 
+	$("#search-dropdown").click(function(e) {
+    e.preventDefault();
+  });
+
+	$("#linear-search").click(function(e) {
+    e.preventDefault();
+		type = types.SEARCH;
+    algorithm = algorithms.LINEARSEARCH;
+    init();
+  });
+
   $("#bubble-sort").click(function(e) {
     e.preventDefault();
-    init();
-    type = "sorting";
+		type = types.SORT;
     algorithm = algorithms.BUBBLESORT;
+    init();
   });
 
   $("#speed").change(function(e) {
@@ -89,7 +106,23 @@ function init() {
   });
   canvas.addChild(label);
 
-  for (var k = 49; k < canvas.width-49; k+=50)
+  switch (type)
+	{
+		case types.SORT: sortInit();
+		break;
+		case types.SEARCH: searchInit();
+		break;
+	}
+}
+
+function searchInit()
+{
+
+}
+
+function sortInit()
+{
+	for (var k = 49; k < canvas.width-49; k+=50)
   {
     var line = canvas.display.line({
     	start: { x: k, y: Math.random()*(canvas.height-150)+100 },
@@ -106,14 +139,8 @@ function start()
 {
   switch (algorithm)
   {
-    case algorithm.BUBBLESORT: bubbleSort();
-                              break;
-  }
-
-
-  if (algorithm === algorithms.BUBBLESORT)
-  {
-    bubbleSort();
+    case algorithms.BUBBLESORT: bubbleSort();
+    break;
   }
 }
 
