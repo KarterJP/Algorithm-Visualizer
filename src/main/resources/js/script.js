@@ -1,7 +1,7 @@
 var canvas;
 var label;
 var fps = 30;
-var lines = [];
+var objects = [];
 var iProgress = 0, jProgress = 0, i, j;
 
 const algorithms = {
@@ -86,7 +86,7 @@ function init() {
   if (canvas != null)
   {
     canvas.destroy();
-    lines.length = 0;
+    objects.length = 0;
   }
 
   canvas = oCanvas.create({
@@ -117,12 +117,35 @@ function init() {
 
 function searchInit()
 {
+	for (var k = 10; k <= canvas.width; k+=80)
+  {
+		var box = canvas.display.rectangle({
+			x: k,
+			y: (canvas.height/2)-50,
+			width: 60,
+			height: 100,
+			fill: "rgba(0, 0, 0, 0.1)",
+			stroke: "inside 5px rgba(51, 51, 51, 1)"
+		});
+    canvas.addChild(box);
 
+		var number = Math.floor(Math.random()*100);
+		var text = canvas.display.text({
+			x: k+box.width/2,
+			y: box.y+(box.height/2)-15,
+			origin: { x: "center", y: "top" },
+			font: "bold 30px sans-serif",
+			text: number,
+			fill: "#333"
+		});
+		canvas.addChild(text);
+    objects.push(number);
+  }
 }
 
 function sortInit()
 {
-	for (var k = 49; k < canvas.width-49; k+=50)
+	for (var k = 50; k <= canvas.width-50; k+=50)
   {
     var line = canvas.display.line({
     	start: { x: k, y: Math.random()*(canvas.height-150)+100 },
@@ -131,7 +154,7 @@ function sortInit()
     	cap: "round"
     });
     canvas.addChild(line);
-    lines.push(line);
+    objects.push(line);
   }
 }
 
@@ -168,7 +191,7 @@ function resetProgress()
 
 async function bubbleSort ()
 {
-  var n = lines.length;
+  var n = objects.length;
 
   if (i >= n-1 && j >= n-i-1)
   {
@@ -180,7 +203,7 @@ async function bubbleSort ()
   for (i = iProgress; i < n-1; i++) {
     for (j = jProgress; j < n-i-1; j++)
     {
-      lines[j].stroke = "25px #28a745";
+      objects[j].stroke = "25px #28a745";
       canvas.redraw();
       await sleep(speed);
 
@@ -188,23 +211,23 @@ async function bubbleSort ()
         return;
       }
 
-      if (lines[j].length > lines[j+1].length)
+      if (objects[j].length > objects[j+1].length)
       {
         moveForward(j);
       }
       else
       {
-        lines[j].stroke = "25px #333";
-        lines[j+1].stroke = "25px #28a745";
+        objects[j].stroke = "25px #333";
+        objects[j+1].stroke = "25px #28a745";
         canvas.redraw();
       }
-      lines[j].stroke = "25px #333";
+      objects[j].stroke = "25px #333";
       canvas.redraw();
     }
     jProgress = 0;
     await sleep(speed);
   }
-  lines[j-1].stroke = "25px #28a745";
+  objects[j-1].stroke = "25px #28a745";
   canvas.redraw();
   iProgress = 0;
   stop();
@@ -212,13 +235,13 @@ async function bubbleSort ()
 
 function moveForward (j)
 {
-  lines[j].x += 50;
+  objects[j].x += 50;
 
-  lines[j+1].x -= 50;
+  objects[j+1].x -= 50;
 
-  var temp = lines[j];
-  lines[j] = lines[j+1];
-  lines[j+1] = temp;
+  var temp = objects[j];
+  objects[j] = objects[j+1];
+  objects[j+1] = temp;
 
   canvas.redraw();
 }
