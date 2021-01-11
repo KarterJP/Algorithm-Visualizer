@@ -11,7 +11,7 @@ body {
 }
 
 nav {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 button {
@@ -20,14 +20,8 @@ button {
   border-color: #333;
 }
 
-.heading {
-	text-align: center;
-	font-size: 1.75em;
-	font-family: sans-serif;
-}
-
 .content {
-  width: 50%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -47,7 +41,7 @@ button {
   text-decoration: none;
 }
 
-#title {
+.heading {
   text-align: center;
   font-family: sans-serif;
   font-weight: bold;
@@ -57,6 +51,7 @@ button {
 
 #about {
   font-family: sans-serif;
+  padding-bottom: 1rem;
 }
 
 #start {
@@ -98,7 +93,7 @@ button {
 }
 
 footer {
-	margin-top: 1em;
+	margin-top: 1rem;
 	background-color: #333;
 }
 
