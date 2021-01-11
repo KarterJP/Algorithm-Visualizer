@@ -68,9 +68,20 @@ button {
   border: 2px solid #333;
 }
 
+#bottom-row {
+  background-color: #444;
+  padding: 2px;
+}
+
+#reset {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 5px;
+}
+
 #search-bar {
   display: inline-block;
-  margin-left: 40px;
+  margin-left: 35px;
 }
 
 #search-button {
@@ -84,11 +95,6 @@ button {
   float: right;
   margin-right: 5px;
   margin-top: 3px;
-}
-
-#bottom-row {
-  background-color: #444;
-  padding: 2px;
 }
 
 #select-label {
