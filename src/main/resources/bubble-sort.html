@@ -41,13 +41,13 @@
 		<div class="d-flex">
 			<div class="flex-column">
 				<div class="flex-row">
-					<button class="control btn bg-success btn-outline-dark rounded-top" id="start" onclick="start();">Start</button>
+					<button class="control btn bg-success btn-outline-dark rounded-top" id="start">Start</button>
+					<button class="control btn bg-danger btn-outline-dark rounded-top" id="stop">Stop</button>
 				</div>
 				<div class="flex-row">
 					<canvas id="canvas" width="800" height="500"></canvas>
 				</div>
 				<div class="flex-row rounded-bottom" id="bottom-row">
-					<button class="control btn btn-outline-dark bg-danger" id="stop" onclick="stop();">Stop</button>
 					<button class="control btn btn-outline-dark bg-danger" id="reset" onclick="init();">Reset</button>
 					<select class="form-control" id="speed">
 						<option id="select-label" selected="selected">Speed</option>

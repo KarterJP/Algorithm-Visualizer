@@ -57,7 +57,9 @@ button {
 }
 
 #stop {
-  margin-left: 5px;
+  display: none;
+  width: 100%;
+  padding: 10px;
 }
 
 #canvas {

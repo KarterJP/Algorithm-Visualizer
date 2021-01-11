@@ -32,6 +32,14 @@ const sleep = (milliseconds) => {
 
 $(document).ready(function()
 {
+	$("#start").click(function(e) {
+		start();
+	});
+
+	$("#stop").click(function(e) {
+		stop();
+	});
+
 	$("#sorting-dropdown").click(function(e) {
 		e.preventDefault();
 	});
@@ -105,7 +113,8 @@ function start()
 function running()
 {
 	isRunning = true;
-	$("#start").prop("disabled", true);
+	$("#start").css("display", "none");
+	$("#stop").css("display", "block");
 }
 
 function stop()
@@ -113,7 +122,8 @@ function stop()
 	iProgress = i;
 	jProgress = j;
 	isRunning = false;
-	$("#start").prop("disabled", false);
+	$("#stop").css("display", "none");
+	$("#start").css("display", "block");
 }
 
 function resetProgress()
