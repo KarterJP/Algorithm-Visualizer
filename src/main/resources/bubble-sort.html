@@ -38,18 +38,18 @@
 		  </div>
 		</nav>
 
-		<div class="d-flex">
-			<div class="flex-column">
-				<div class="flex-row">
+		<div class="dashboard">
+			<div class="d-flex flex-column">
+				<div class="d-flex flex-row rounded-top" id="top-row">
 					<button class="control btn bg-success btn-outline-dark rounded-top" id="start">Start</button>
 					<button class="control btn bg-danger btn-outline-dark rounded-top" id="stop">Stop</button>
 				</div>
-				<div class="flex-row">
+				<div class="d-flex flex-row">
 					<canvas id="canvas" width="800" height="500"></canvas>
 				</div>
-				<div class="flex-row rounded-bottom" id="bottom-row">
-					<button class="control btn btn-outline-dark bg-danger" id="reset" onclick="init();">Reset</button>
-					<select class="form-control" id="speed">
+				<div class="d-flex flex-row rounded-bottom" id="bottom-row">
+					<button class="control btn bg-danger btn-outline-dark mr-auto" id="reset" onclick="init();">Reset</button>
+					<select class="form-control ml-auto" id="speed">
 						<option id="select-label" selected="selected">Speed</option>
 						<option value="slow">Slow</option>
 					  <option value="normal">Normal</option>

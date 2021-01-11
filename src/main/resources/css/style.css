@@ -32,7 +32,7 @@ button {
   padding: 10px;
 }
 
-.d-flex {
+.dashboard {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
@@ -49,6 +49,11 @@ button {
 #about {
   font-family: sans-serif;
   padding-bottom: 1rem;
+}
+
+#top-row {
+  background-color: #444;
+  padding: 2px;
 }
 
 #start {
@@ -79,20 +84,9 @@ button {
   margin-left: 5px;
 }
 
-#search-bar {
-  display: inline-block;
-  margin-left: 35px;
-}
-
-#search-button {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 #speed {
   display: inline-block;
   width: auto;
-  float: right;
   margin-right: 5px;
   margin-top: 3px;
 }
