@@ -148,7 +148,7 @@ function searchInit()
 			fill: "#333"
 		});
 		canvas.addChild(text);
-		objects.push(number);
+		objects.push(text);
 	}
 }
 
