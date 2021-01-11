@@ -44,7 +44,6 @@
 					<canvas id="canvas" width="800" height="500"></canvas>
 				</div>
 				<div class="flex-row rounded-bottom" id="bottom-row">
-					<button class="control btn btn-outline-dark bg-danger" id="stop" onclick="stop();">Stop</button>
 					<button class="control btn btn-outline-dark bg-danger" id="reset" onclick="init();">Reset</button>
 					<div id="search-bar">
 						<input class="form-control-sm" type="text" id="input" placeholder="Search for a number"></input>
@@ -79,19 +78,30 @@
 		  init();
 		});
 
-		function linearSearch()
+		async function linearSearch()
 		{
+			running();
 			resetColors();
 			var input = $("#input").val();
 
 			for (var i = 0; i < objects.length; i++)
 			{
-				if (objects[i].text == input)
+				objects[i].fill = "#999";
+				canvas.redraw();
+				await sleep(speed);
+
+				if (objects[i].text != input)
 				{
+					objects[i].fill = "#f00";
+				}
+				else {
 					objects[i].fill = "#28a745";
+					i += objects.length;
 				}
 				canvas.redraw();
+				await sleep(speed);
 			}
+			stop();
 		}
 
 		function resetColors()
