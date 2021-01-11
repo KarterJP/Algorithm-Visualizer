@@ -26,19 +26,16 @@ button {
   margin-right: auto;
 }
 
+.control {
+  display: inline-block;
+  color: black;
+  padding: 10px;
+}
+
 .d-flex {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.controls {
-	background-color: #333;
-  font-family: Arial;
-	font-size: 16px;
-  color: white;
-  text-align: center;
-  text-decoration: none;
 }
 
 .heading {
@@ -56,24 +53,27 @@ button {
 
 #start {
 	width: 100%;
-	padding: 10px 10px;
+  padding: 10px;
 }
 
 #stop {
-  display: inline-block;
-  padding: 10px;
   margin-left: 5px;
-}
-
-#reset {
-  display: inline-block;
-  padding: 10px;
 }
 
 #canvas {
 	display: block;
 	width: 100%;
   border: 2px solid #333;
+}
+
+#search-bar {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+#search-button {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #speed {
@@ -86,6 +86,7 @@ button {
 
 #bottom-row {
   background-color: #444;
+  padding: 2px;
 }
 
 #select-label {
@@ -98,5 +99,5 @@ footer {
 }
 
 .footer-text {
-	padding-top:13px;
+	padding-top: 13px;
 }
