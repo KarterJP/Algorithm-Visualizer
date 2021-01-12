@@ -186,6 +186,7 @@ function sortInit()
 function pathfindInit()
 {
 	for (var j = 100; j < canvas.height-40; j+=40) {
+		var cells = [];
 		for (var k = 40; k < canvas.width-40; k+=40)
 		{
 			var cell = canvas.display.rectangle({
@@ -197,6 +198,16 @@ function pathfindInit()
 				stroke: "inside 1px #333"
 			});
 			canvas.addChild(cell);
+			cells.push(cell);
 		}
+		grid.push(cells);
 	}
+
+	x1 = Math.floor(Math.random()*grid.length);
+	y1 = Math.floor(Math.random()*(cells.length/2));
+	x2 = Math.floor(Math.random()*grid.length);
+	y2 = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
+
+	grid[x1][y1].fill = "#0f0";
+	grid[x2][y2].fill = "#f00";
 }
