@@ -74,6 +74,8 @@
 	<script src="js/script.js"></script>
 	<script>
     var grid = [];
+		var unvisited = [];
+		var closed = [];
     var x1, y1, x2, y2;
 
 		oCanvas.domReady(function() {
@@ -82,7 +84,29 @@
 		  init();
 		});
 
-		
+		function dijkstra()
+		{
+			unvisited = grid;
+		}
+
+		class Node {
+		  constructor(x, y, distance) {
+		    this.x = x;
+		    this.y = y;
+				this.distance = distance;
+
+				this.cell = canvas.display.rectangle({
+					x: x,
+					y: y,
+					width: 40,
+					height: 40,
+					fill: "rgba(255, 255, 255, 1)",
+					stroke: "inside 1px #333"
+				});
+				canvas.addChild(this.cell);
+		  }
+		}
+
 	</script>
 </body>
 </html>

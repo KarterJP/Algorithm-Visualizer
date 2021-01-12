@@ -113,6 +113,8 @@ function start()
 		break;
 		case algorithms.LINEARSEARCH: linearSearch();
 		break;
+		case algorithms.DIJKSTRA: dijkstra();
+		break;
 	}
 }
 
@@ -185,29 +187,24 @@ function sortInit()
 
 function pathfindInit()
 {
-	for (var j = 100; j < canvas.height-40; j+=40) {
+	var i = 0;
+	for (var y = 100; y < canvas.height-40; y+=40) {
+		var j = 0;
 		var cells = [];
-		for (var k = 40; k < canvas.width-40; k+=40)
+		for (var x = 40; x < canvas.width-40; x+=40)
 		{
-			var cell = canvas.display.rectangle({
-				x: k,
-				y: j,
-				width: 40,
-				height: 40,
-				fill: "rgba(255, 255, 255, 1)",
-				stroke: "inside 1px #333"
-			});
-			canvas.addChild(cell);
-			cells.push(cell);
+			cells.push(new Node(x, y, Infinity));
+			j++;
 		}
 		grid.push(cells);
+		i++;
 	}
 
-	x1 = Math.floor(Math.random()*grid.length);
-	y1 = Math.floor(Math.random()*(cells.length/2));
-	x2 = Math.floor(Math.random()*grid.length);
-	y2 = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
+	i1 = Math.floor(Math.random()*grid.length);
+	j1 = Math.floor(Math.random()*(cells.length/2));
+	i2 = Math.floor(Math.random()*grid.length);
+	j2 = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
 
-	grid[x1][y1].fill = "#0f0";
-	grid[x2][y2].fill = "#f00";
+	grid[i1][j1].cell.fill = "#0f0";
+	grid[i2][j2].cell.fill = "#f00";
 }
