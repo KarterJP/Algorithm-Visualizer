@@ -84,6 +84,11 @@ button {
   margin-left: 5px;
 }
 
+#instruction {
+  display: inline;
+  font-size: 20px;
+}
+
 #speed {
   display: inline-block;
   width: auto;

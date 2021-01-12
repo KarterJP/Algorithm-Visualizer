@@ -13,7 +13,7 @@ const algorithms = {
 const types = {
 	SORT: 0,
 	SEARCH: 1,
-	PATHFINDING: 2,
+	PATHFIND: 2,
 }
 
 const speeds = {
@@ -100,6 +100,8 @@ function init() {
 		break;
 		case types.SEARCH: searchInit();
 		break;
+		case types.PATHFIND: pathfindInit();
+		break;
 	}
 }
 
@@ -178,5 +180,23 @@ function sortInit()
 		});
 		canvas.addChild(line);
 		objects.push(line);
+	}
+}
+
+function pathfindInit()
+{
+	for (var j = 100; j < canvas.height-40; j+=40) {
+		for (var k = 40; k < canvas.width-40; k+=40)
+		{
+			var cell = canvas.display.rectangle({
+				x: k,
+				y: j,
+				width: 40,
+				height: 40,
+				fill: "rgba(255, 255, 255, 1)",
+				stroke: "inside 1px #333"
+			});
+			canvas.addChild(cell);
+		}
 	}
 }
