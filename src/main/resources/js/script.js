@@ -107,6 +107,8 @@ function start()
 	{
 		case algorithms.BUBBLESORT: bubbleSort();
 		break;
+		case algorithms.LINEARSEARCH: linearSearch();
+		break;
 	}
 }
 
