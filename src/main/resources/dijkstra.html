@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Linear Search</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand" href="index.html" id="navbar-brand">Algorithms</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="search-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Search
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="search-dropdown">
+		          <a class="dropdown-item" href="linear-search.html" id="linear-search">Linear</a>
+		        </div>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="sorting-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Sorting
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="sorting-dropdown">
+		          <a class="dropdown-item" href="bubble-sort.html" id="bubble-sort">Bubble Sort</a>
+		        </div>
+		      </li>
+				</ul>
+		  </div>
+		</nav>
+
+    <div class="dashboard">
+			<div class="d-flex flex-column">
+				<div class="d-flex flex-row rounded-top" id="top-row">
+					<button class="control btn bg-success btn-outline-dark rounded-top" id="start">Start</button>
+					<button class="control btn bg-danger btn-outline-dark rounded-top" id="stop">Stop</button>
+				</div>
+				<div class="d-flex flex-row">
+					<canvas id="canvas" width="800" height="500"></canvas>
+				</div>
+				<div class="d-flex flex-row rounded-bottom" id="bottom-row">
+					<button class="control btn bg-danger btn-outline-dark mr-auto" id="reset" onclick="init();">Reset</button>
+					<select class="form-control ml-auto" id="speed">
+						<option id="select-label" selected="selected">Speed</option>
+						<option value="slow">Slow</option>
+					  <option value="normal">Normal</option>
+						<option value="fast">Fast</option>
+						<option value="supersonic">Supersonic</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+			<div class="row text-center">
+					<p class="col-md-12 text-light footer-text">Made by Karter Phillips</p>
+			</div>
+		<footer>
+	</div>
+
+	<script src="js/jQuery.js"></script>
+	<script src="js/bootstrap.bundle.js"></script>
+	<script src="js/ocanvas-2.10.0.js"></script>
+	<script src="js/script.js"></script>
+	<script>
+		oCanvas.domReady(function() {
+			type = types.PATHFINDING;
+			algorithm = algorithms.DIJKSTRA;
+		  init();
+		});
+	</script>
+</body>
+</html>

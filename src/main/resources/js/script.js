@@ -7,11 +7,13 @@ var iProgress = 0, jProgress = 0, i, j;
 const algorithms = {
 		BUBBLESORT: "Bubble Sort",
 		LINEARSEARCH: "Linear Search",
+		DIJKSTRA: "Dijkstra's Algorithm",
 }
 
 const types = {
 	SORT: 0,
 	SEARCH: 1,
+	PATHFINDING: 2,
 }
 
 const speeds = {
