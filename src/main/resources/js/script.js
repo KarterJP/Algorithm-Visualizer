@@ -188,10 +188,10 @@ function sortInit()
 function pathfindInit()
 {
 	var i = 0;
-	for (var y = 100; y < canvas.height-40; y+=40) {
+	for (var y = 100; y < canvas.height-cellSize; y+=cellSize) {
 		var j = 0;
 		var cells = [];
-		for (var x = 40; x < canvas.width-40; x+=40)
+		for (var x = cellSize; x < canvas.width-cellSize; x+=cellSize)
 		{
 			cells.push(new Node(x, y, Infinity));
 			j++;
@@ -200,11 +200,20 @@ function pathfindInit()
 		i++;
 	}
 
-	i1 = Math.floor(Math.random()*grid.length);
-	j1 = Math.floor(Math.random()*(cells.length/2));
-	i2 = Math.floor(Math.random()*grid.length);
-	j2 = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
+	rowLength = grid[0].length;
+	columnLength = grid.length;
 
-	grid[i1][j1].cell.fill = "#0f0";
-	grid[i2][j2].cell.fill = "#f00";
+	startI = Math.floor(Math.random()*grid.length);
+	startJ = Math.floor(Math.random()*(cells.length/2));
+	endI = Math.floor(Math.random()*grid.length);
+ 	endJ = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
+
+	grid[startI][startJ].distance = 0;
+	grid[startI][startJ].addCircle();
+	grid[startI][startJ].fillCircle("#f00");
+
+	grid[endI][endJ].addCircle();
+	grid[endI][endJ].fillCircle("#0f0");
+
+
 }

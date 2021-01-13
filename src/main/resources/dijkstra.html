@@ -73,10 +73,13 @@
 	<script src="js/ocanvas-2.10.0.js"></script>
 	<script src="js/script.js"></script>
 	<script>
-    var grid = [];
+		var grid = [];
+		var rowLength;
+		var columnLength;
 		var unvisited = [];
 		var closed = [];
-    var x1, y1, x2, y2;
+		var cellSize = 40;
+    var startI, startJ, endI, endJ;
 
 		oCanvas.domReady(function() {
 			type = types.PATHFIND;
@@ -86,7 +89,23 @@
 
 		function dijkstra()
 		{
+			var currentI = startI
+			var currentJ = startJ;
 			unvisited = grid;
+
+			for (var m = currentI-1; m <= currentI+1; m++) {
+				for (var n = currentJ-1; n <= currentJ+1; n++)
+				{
+					if (m >= 0 && n >= 0 && m < rowLength && n < columnLength)
+					{
+						grid[m][n].addCircle();
+
+						var newDistance = grid[currentI][currentJ].distance + 1;
+
+						grid[m][n].distance = Math.min(grid[m][n].distance, newDistance);
+					}
+				}
+			}
 		}
 
 		class Node {
@@ -98,13 +117,29 @@
 				this.cell = canvas.display.rectangle({
 					x: x,
 					y: y,
-					width: 40,
-					height: 40,
-					fill: "rgba(255, 255, 255, 1)",
-					stroke: "inside 1px #333"
+					width: cellSize,
+					height: cellSize,
+					fill: "white",
+					stroke: "inside 1px #999"
 				});
 				canvas.addChild(this.cell);
 		  }
+
+			addCircle()
+			{
+				this.circle = canvas.display.ellipse({
+					x: this.x + (cellSize/2),
+					y: this.y + (cellSize/2),
+					radius: 10,
+					stroke: "2px #333"
+				});
+				canvas.addChild(this.circle);
+			}
+
+			fillCircle(color)
+			{
+				this.circle.fill = color;
+			}
 		}
 
 	</script>
