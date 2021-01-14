@@ -193,7 +193,7 @@ function pathfindInit()
 		var cells = [];
 		for (var x = cellSize; x < canvas.width-cellSize; x+=cellSize)
 		{
-			cells.push(new Node(x, y, Infinity));
+			cells.push(new Node(x, y, i, j, Infinity));
 			j++;
 		}
 		grid.push(cells);
@@ -203,17 +203,15 @@ function pathfindInit()
 	rowLength = grid[0].length;
 	columnLength = grid.length;
 
-	startI = Math.floor(Math.random()*grid.length);
-	startJ = Math.floor(Math.random()*(cells.length/2));
-	endI = Math.floor(Math.random()*grid.length);
- 	endJ = Math.floor(Math.random()*(cells.length/2)+(cells.length/2));
+	beginning = grid[Math.floor(Math.random()*grid.length)][Math.floor(Math.random()*(cells.length/2))];
+	destination = grid[Math.floor(Math.random()*grid.length)][Math.floor(Math.random()*(cells.length/2)+(cells.length/2))];
 
-	grid[startI][startJ].distance = 0;
-	grid[startI][startJ].addCircle();
-	grid[startI][startJ].fillCircle("#f00");
+	beginning.distance = 0;
+	beginning.addCircle();
+	beginning.fillCircle("#f00");
 
-	grid[endI][endJ].addCircle();
-	grid[endI][endJ].fillCircle("#0f0");
+	destination.addCircle();
+	destination.fillCircle("#0f0");
 
 
 }

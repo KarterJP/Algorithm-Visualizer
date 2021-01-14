@@ -71,15 +71,15 @@
 	<script src="js/jQuery.js"></script>
 	<script src="js/bootstrap.bundle.js"></script>
 	<script src="js/ocanvas-2.10.0.js"></script>
+	<script src="js/Queue.js"></script>
 	<script src="js/script.js"></script>
 	<script>
 		var grid = [];
 		var rowLength;
 		var columnLength;
-		var unvisited = [];
-		var closed = [];
+		var unvisited = new Queue();
 		var cellSize = 40;
-    var startI, startJ, endI, endJ;
+		var beginning, destination;
 
 		oCanvas.domReady(function() {
 			type = types.PATHFIND;
@@ -87,42 +87,44 @@
 		  init();
 		});
 
-		function dijkstra()
+		async function dijkstra()
 		{
-			var currentI = startI
-			var currentJ = startJ;
-			unvisited = grid;
+			running();
+			beginning.markNeighbors();
+			var last = beginning;
 
-			for (var m = currentI-1; m <= currentI+1; m++) {
-				for (var n = currentJ-1; n <= currentJ+1; n++)
+			while (!unvisited.isEmpty()) {
+				current = unvisited.dequeue();
+				if (!isRunning)
 				{
-					if (m >= 0 && n >= 0 && m < rowLength && n < columnLength)
-					{
-						grid[m][n].addCircle();
-
-						var newDistance = grid[currentI][currentJ].distance + 1;
-
-						grid[m][n].distance = Math.min(grid[m][n].distance, newDistance);
-					}
+					return;
 				}
+
+				var newDistance = last.distance + 1;
+				current.distance = Math.min(current.distance, newDistance);
+				current.visited = true;
+				if (current.i == destination.i && current.j == destination.j)
+				{
+					stop();
+					return;
+				}
+				current.fillCircle("red");
+				canvas.redraw();
+				current.markNeighbors();
+				canvas.redraw();
+				await sleep(speed);
+				last = current;
 			}
 		}
 
 		class Node {
-		  constructor(x, y, distance) {
+		  constructor(x, y, i, j, distance) {
 		    this.x = x;
 		    this.y = y;
+				this.i = i;
+				this.j = j;
 				this.distance = distance;
-
-				this.cell = canvas.display.rectangle({
-					x: x,
-					y: y,
-					width: cellSize,
-					height: cellSize,
-					fill: "white",
-					stroke: "inside 1px #999"
-				});
-				canvas.addChild(this.cell);
+				this.visited = false;
 		  }
 
 			addCircle()
@@ -139,6 +141,21 @@
 			fillCircle(color)
 			{
 				this.circle.fill = color;
+			}
+
+			markNeighbors()
+			{
+				for (var m = this.i-1; m <= this.i+1; m++) {
+					for (var n = this.j-1; n <= this.j+1; n++)
+					{
+						if (m >= 0 && n >= 0 && n < rowLength && m < columnLength && !grid[m][n].visited)
+						{
+							var neighbor = grid[m][n];
+							unvisited.enqueue(neighbor);
+							neighbor.addCircle();
+						}
+					}
+				}
 			}
 		}
 
