@@ -1,6 +1,6 @@
 var canvas;
 var label;
-var fps = 30;
+var fps = 5;
 var objects = [];
 var iProgress = 0, jProgress = 0, i, j;
 
@@ -80,7 +80,7 @@ function init() {
 	canvas = oCanvas.create({
 		canvas: "#canvas",
 		background: "#EDF5E1",
-		drawEachFrame: true,
+		drawEachFrame: false,
 		fps: fps
 	});
 
@@ -193,25 +193,19 @@ function pathfindInit()
 		var cells = [];
 		for (var x = cellSize; x < canvas.width-cellSize; x+=cellSize)
 		{
-			cells.push(new Node(x, y, i, j, Infinity));
+			cells.push(new Node(x, y, i, j));
 			j++;
 		}
 		grid.push(cells);
 		i++;
 	}
-
+	
 	rowLength = grid[0].length;
 	columnLength = grid.length;
 
-	beginning = grid[Math.floor(Math.random()*grid.length)][Math.floor(Math.random()*(cells.length/2))];
-	destination = grid[Math.floor(Math.random()*grid.length)][Math.floor(Math.random()*(cells.length/2)+(cells.length/2))];
+	beginning = grid[2][2];
+	destination = grid[columnLength-2][rowLength-1];
 
-	beginning.distance = 0;
-	beginning.addCircle();
-	beginning.fillCircle("#f00");
-
-	destination.addCircle();
-	destination.fillCircle("#0f0");
-
-
+	beginning.becomeBeginning();
+	destination.becomeDestination();
 }

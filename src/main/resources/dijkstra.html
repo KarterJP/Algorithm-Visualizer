@@ -71,15 +71,13 @@
 	<script src="js/jQuery.js"></script>
 	<script src="js/bootstrap.bundle.js"></script>
 	<script src="js/ocanvas-2.10.0.js"></script>
-	<script src="js/Queue.js"></script>
+	<script src="js/BinaryHeap.js"></script>
 	<script src="js/script.js"></script>
 	<script>
 		var grid = [];
-		var rowLength;
-		var columnLength;
-		var unvisited = new Queue();
+		var columnLength, rowLength, beginning, destination, current;
+		var unvisited = new BinaryHeap(function(node){return node.distance});
 		var cellSize = 40;
-		var beginning, destination, current;
 
 		oCanvas.domReady(function() {
 			type = types.PATHFIND;
@@ -90,47 +88,64 @@
 		async function dijkstra()
 		{
 			running();
-			beginning.seeNeighbors();
+			unvisited.push(beginning);
 
-			while (!unvisited.isEmpty()) {
+			while (unvisited.size() > 0) {
 				if (!isRunning) { return; }
-				current = unvisited.peek();
+				current = unvisited.pop();
+				//alert("Starting grid["+current.i+"]["+current.j+"]!");
 
-				if (current.i == destination.i && current.j == destination.j)
+				if (current.destination)
 				{
 					stop();
-					return;
+					break;
 				}
-				current.seeNeighbors();
-				canvas.redraw();
-				await sleep(50);
+				current.checkNeighbors();
+				await sleep(speed/5);
 			}
 
+			var notFinished = true;
 			var here = destination;
-			let notFinished = true;
+
+			//alert("Creating path!");
 
 			while (notFinished)
 			{
-				here.fillCircle("#0aa");
-				here = here.parent;
-				if (here.i == beginning.i && here.j == beginning.j)
-				{
-					notFinished = false;
+				let lowestNeighbor = destination;
+				for (var m = here.i-1; m <= here.i+1; m++) {
+					for (var n = here.j-1; n <= here.j+1; n++) {
+						if (m >= 0 && n >= 0 && n < rowLength && m < columnLength)
+						{
+							let neighbor = grid[m][n];
+							if (neighbor.distance < lowestNeighbor.distance)
+							{
+								lowestNeighbor = neighbor;
+							}
+
+							if (neighbor.beginning)
+							{
+								notFinished = false;
+								break;
+							}
+						}
+					}
 				}
+				lowestNeighbor.fillCircle("#0aa");
+				here = lowestNeighbor;
 				canvas.redraw();
-				await sleep(50);
+				await sleep(speed/5);
 			}
+			canvas.redraw();
 		}
 
 		class Node {
-		  constructor(x, y, i, j, distance) {
+		  constructor(x, y, i, j) {
 		    this.x = x;
 		    this.y = y;
 				this.i = i;
 				this.j = j;
-				this.distance = distance;
 				this.visited = false;
-				this.parent = null;
+				this.distance = Infinity;
 		  }
 
 			addCircle()
@@ -149,30 +164,60 @@
 				this.circle.fill = color;
 			}
 
-			seeNeighbors()
+			checkNeighbors()
 			{
+
+				//alert("Seeing neighbors of grid["+this.i+"]["+this.j+"]!");
+
 				for (var m = this.i-1; m <= this.i+1; m++) {
-					for (var n = this.j-1; n <= this.j+1; n++)
-					{
-						if (m >= 0 && n >= 0 && n < rowLength && m < columnLength && !grid[m][n].visited)
+					for (var n = this.j-1; n <= this.j+1; n++) {
+						if (!(m == this.i && n == this.j) && m >= 0 && n >= 0 && n < rowLength && m < columnLength)
 						{
-							var neighbor = grid[m][n];
-							neighbor.parent = this;
-							unvisited.enqueue(neighbor);
-							var newDistance = this.distance + 1;
-							neighbor.distance = Math.min(neighbor.distance, newDistance);
-							neighbor.addCircle();
-							canvas.redraw();
+							if (!grid[m][n].visited)
+							{
+
+								//alert("grid["+this.i+"]["+this.j+"] has neighbor grid["+m+"]["+n+"]!");
+
+								var neighbor = grid[m][n];
+								if (!unvisited.has(neighbor))
+								{
+									unvisited.push(neighbor);
+								}
+								var newDistance = this.distance + 1;
+								if (m != this.i && n != this.j) {
+									newDistance += .4;
+								}
+								neighbor.distance = Math.min(neighbor.distance, newDistance);
+								neighbor.addCircle();
+								canvas.redraw();
+							}
 						}
 					}
 				}
 				this.visited = true;
-				this.fillCircle("red");
-				unvisited.dequeue();
+				unvisited.remove(this);
+				if (!this.beginning) {
+					this.fillCircle("#FF6347");
+				}
 				canvas.redraw();
 			}
-		}
 
+			becomeBeginning()
+			{
+				this.beginning = true;
+				this.visited = true;
+				this.distance = 0;
+				this.addCircle();
+				this.fillCircle("#0079bf");
+			}
+
+			becomeDestination()
+			{
+				this.destination = true;
+				this.addCircle();
+				this.fillCircle("#0f0");
+			}
+		}
 	</script>
 </body>
 </html>
