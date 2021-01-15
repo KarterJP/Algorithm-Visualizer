@@ -94,7 +94,6 @@
 			while (unvisited.size() > 0) {
 				if (!isRunning) { return; }
 				current = unvisited.pop();
-				//alert("Starting grid["+current.i+"]["+current.j+"]!");
 
 				if (current.destination)
 				{
@@ -128,22 +127,6 @@
 									var startCoord = [path[b+1].j - path[b].j, path[b+1].i - path[b].i];
 									var endCoord = [path[b-1].j - path[b].j , path[b-1].i - path[b].i];
 
-									/*var firstVertical = path[b+1].i - path[b].i;
-									var firstHorizontal = path[b+1].j - path[b].j;
-									var secondVertical = path[b].i - path[b-1].i;
-									var secondHorizontal = path[b].j - path[b-1].j;
-
-									firsts:
-									top right [1,-1]
-									top middle [0,-1]
-									top left [-1,-1]
-									bottom right [1,1]
-									bottom middle [0,1]
-									bottom left [-1,1]
-									right middle [1,0]
-									left middle [-1,0]*/
-
-
 									var startX = path[b].x + ((startCoord[0]+1)*halfCell);
 									var startY = path[b].y + ((startCoord[1]+1)*halfCell);
 									var endX = path[b].x + ((endCoord[0]+1)*halfCell);
@@ -164,28 +147,6 @@
 										cap: "round"
 									});
 									canvas.addChild(secondLine);
-
-
-
-									/*if (secondVertical == 1)
-									{
-										going down
-									} else if (secondVertical == 0) {
-										going horizontal
-									} else {
-										going up
-									}
-
-									if (secondHorizontal == 1)
-									{
-										going right
-									} else if (secondHorizontal == 0) {
-										going vertical
-									} else {
-										going left
-									}*/
-
-
 								}
 								return;
 						 	}
@@ -228,18 +189,12 @@
 
 			checkNeighbors()
 			{
-
-				//alert("Seeing neighbors of grid["+this.i+"]["+this.j+"]!");
-
 				for (var m = this.i-1; m <= this.i+1; m++) {
 					for (var n = this.j-1; n <= this.j+1; n++) {
 						if (!(m == this.i && n == this.j) && m >= 0 && n >= 0 && n < rowLength && m < columnLength)
 						{
 							if (!grid[m][n].visited)
 							{
-
-								//alert("grid["+this.i+"]["+this.j+"] has neighbor grid["+m+"]["+n+"]!");
-
 								var neighbor = grid[m][n];
 								if (!unvisited.has(neighbor))
 								{
