@@ -23,6 +23,14 @@ const speeds = {
 	SUPERSONIC: 100,
 }
 
+const colors = {
+	PRIMARY: "#333",
+	START: "#FFDC00",
+	END: "#2ECC40",
+	VISITED: "#FF6347",
+	PATH: "#0074D9"
+}
+
 var speed = speeds.NORMAL;
 var type = types.SORT;
 var algorithm = algorithms.BUBBLESORT;
@@ -90,7 +98,7 @@ function init() {
 		origin: { x: "left", y: "top" },
 		font: "bold 30px sans-serif",
 		text: algorithm,
-		fill: "#333"
+		fill: colors.PRIMARY
 	});
 	canvas.addChild(label);
 
@@ -163,7 +171,7 @@ function searchInit()
 			origin: { x: "center", y: "top" },
 			font: "bold 30px sans-serif",
 			text: number,
-			fill: "#333"
+			fill: colors.PRIMARY
 		});
 		canvas.addChild(text);
 		objects.push(text);
@@ -177,7 +185,7 @@ function sortInit()
 		var line = canvas.display.line({
 			start: { x: k, y: Math.random()*(canvas.height-150)+100 },
 			end: { x: k, y: canvas.height },
-			stroke: "25px #333",
+			stroke: "25px "+colors.PRIMARY,
 			cap: "round"
 		});
 		canvas.addChild(line);
@@ -199,7 +207,7 @@ function pathfindInit()
 		grid.push(cells);
 		i++;
 	}
-	
+
 	rowLength = grid[0].length;
 	columnLength = grid.length;
 

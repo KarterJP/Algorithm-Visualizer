@@ -75,9 +75,10 @@
 	<script src="js/script.js"></script>
 	<script>
 		var grid = [];
+		var cellSize = 40;
 		var columnLength, rowLength, beginning, destination, current;
 		var unvisited = new BinaryHeap(function(node){return node.distance});
-		var cellSize = 40;
+		var path = [];
 
 		oCanvas.domReady(function() {
 			type = types.PATHFIND;
@@ -104,12 +105,9 @@
 				await sleep(speed/5);
 			}
 
-			var notFinished = true;
+			path.push(destination);
 			var here = destination;
-
-			//alert("Creating path!");
-
-			while (notFinished)
+			while (true)
 			{
 				let lowestNeighbor = destination;
 				for (var m = here.i-1; m <= here.i+1; m++) {
@@ -122,20 +120,84 @@
 								lowestNeighbor = neighbor;
 							}
 
-							if (neighbor.beginning)
-							{
-								notFinished = false;
-								break;
-							}
+							if (neighbor.beginning) {
+								path.push(beginning);
+								for (var b = path.length-2; b > 0; b--)
+								{
+									var halfCell = cellSize/2;
+									var startCoord = [path[b+1].j - path[b].j, path[b+1].i - path[b].i];
+									var endCoord = [path[b-1].j - path[b].j , path[b-1].i - path[b].i];
+
+									/*var firstVertical = path[b+1].i - path[b].i;
+									var firstHorizontal = path[b+1].j - path[b].j;
+									var secondVertical = path[b].i - path[b-1].i;
+									var secondHorizontal = path[b].j - path[b-1].j;
+
+									firsts:
+									top right [1,-1]
+									top middle [0,-1]
+									top left [-1,-1]
+									bottom right [1,1]
+									bottom middle [0,1]
+									bottom left [-1,1]
+									right middle [1,0]
+									left middle [-1,0]*/
+
+
+									var startX = path[b].x + ((startCoord[0]+1)*halfCell);
+									var startY = path[b].y + ((startCoord[1]+1)*halfCell);
+									var endX = path[b].x + ((endCoord[0]+1)*halfCell);
+									var endY = path[b].y + ((endCoord[1]+1)*halfCell);
+
+									var firstLine = canvas.display.line({
+										start: { x: startX, y: startY },
+										end: { x: path[b].x+halfCell, y: path[b].y+halfCell },
+										stroke: "5px "+colors.PATH,
+										cap: "round"
+									});
+									canvas.addChild(firstLine);
+
+									var secondLine = canvas.display.line({
+										start: { x: path[b].x+halfCell, y: path[b].y+halfCell },
+										end: { x: endX, y: endY },
+										stroke: "5px "+colors.PATH,
+										cap: "round"
+									});
+									canvas.addChild(secondLine);
+
+
+
+									/*if (secondVertical == 1)
+									{
+										going down
+									} else if (secondVertical == 0) {
+										going horizontal
+									} else {
+										going up
+									}
+
+									if (secondHorizontal == 1)
+									{
+										going right
+									} else if (secondHorizontal == 0) {
+										going vertical
+									} else {
+										going left
+									}*/
+
+
+								}
+								return;
+						 	}
 						}
 					}
 				}
-				lowestNeighbor.fillCircle("#0aa");
+				lowestNeighbor.fillCircle(colors.PATH);
+				path.push(lowestNeighbor);
 				here = lowestNeighbor;
 				canvas.redraw();
-				await sleep(speed/5);
+				await sleep(speed/10);
 			}
-			canvas.redraw();
 		}
 
 		class Node {
@@ -153,8 +215,8 @@
 				this.circle = canvas.display.ellipse({
 					x: this.x + (cellSize/2),
 					y: this.y + (cellSize/2),
-					radius: 10,
-					stroke: "2px #333"
+					radius: cellSize/4,
+					stroke: "2px "+colors.PRIMARY
 				});
 				canvas.addChild(this.circle);
 			}
@@ -197,7 +259,7 @@
 				this.visited = true;
 				unvisited.remove(this);
 				if (!this.beginning) {
-					this.fillCircle("#FF6347");
+					this.fillCircle(colors.VISITED);
 				}
 				canvas.redraw();
 			}
@@ -208,14 +270,14 @@
 				this.visited = true;
 				this.distance = 0;
 				this.addCircle();
-				this.fillCircle("#0079bf");
+				this.fillCircle(colors.START);
 			}
 
 			becomeDestination()
 			{
 				this.destination = true;
 				this.addCircle();
-				this.fillCircle("#0f0");
+				this.fillCircle(colors.END);
 			}
 		}
 	</script>
