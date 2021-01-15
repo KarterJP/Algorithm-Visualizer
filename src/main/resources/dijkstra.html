@@ -90,6 +90,8 @@
 		{
 			running();
 			unvisited.push(beginning);
+			grid[2][5].toggleWall();
+			grid[3][4].toggleWall();
 
 			while (unvisited.size() > 0) {
 				if (!isRunning) { return; }
@@ -168,6 +170,7 @@
 				this.i = i;
 				this.j = j;
 				this.visited = false;
+				this.wall = false;
 				this.distance = Infinity;
 		  }
 
@@ -193,7 +196,7 @@
 					for (var n = this.j-1; n <= this.j+1; n++) {
 						if (!(m == this.i && n == this.j) && m >= 0 && n >= 0 && n < rowLength && m < columnLength)
 						{
-							if (!grid[m][n].visited)
+							if (!grid[m][n].visited && !grid[m][n].wall)
 							{
 								var neighbor = grid[m][n];
 								if (!unvisited.has(neighbor))
@@ -217,6 +220,26 @@
 					this.fillCircle(colors.VISITED);
 				}
 				canvas.redraw();
+			}
+
+			toggleWall()
+			{
+				if (!this.wall)
+				{
+					this.wall = true;
+					this.block = canvas.display.rectangle({
+						x: this.x,
+						y: this.y,
+						width: cellSize,
+						height: cellSize,
+						fill: colors.PRIMARY
+					});
+					canvas.addChild(this.block);
+				}
+				else {
+					this.wall = false;
+					canvas.removeChild(this.block, true);
+				}
 			}
 
 			becomeBeginning()
