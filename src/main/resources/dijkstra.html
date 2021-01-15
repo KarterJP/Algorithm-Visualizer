@@ -79,7 +79,7 @@
 		var columnLength;
 		var unvisited = new Queue();
 		var cellSize = 40;
-		var beginning, destination;
+		var beginning, destination, current;
 
 		oCanvas.domReady(function() {
 			type = types.PATHFIND;
@@ -90,30 +90,35 @@
 		async function dijkstra()
 		{
 			running();
-			beginning.markNeighbors();
-			var last = beginning;
+			beginning.seeNeighbors();
 
 			while (!unvisited.isEmpty()) {
-				current = unvisited.dequeue();
-				if (!isRunning)
-				{
-					return;
-				}
+				if (!isRunning) { return; }
+				current = unvisited.peek();
 
-				var newDistance = last.distance + 1;
-				current.distance = Math.min(current.distance, newDistance);
-				current.visited = true;
 				if (current.i == destination.i && current.j == destination.j)
 				{
 					stop();
 					return;
 				}
-				current.fillCircle("red");
+				current.seeNeighbors();
 				canvas.redraw();
-				current.markNeighbors();
+				await sleep(50);
+			}
+
+			var here = destination;
+			let notFinished = true;
+
+			while (notFinished)
+			{
+				here.fillCircle("#0aa");
+				here = here.parent;
+				if (here.i == beginning.i && here.j == beginning.j)
+				{
+					notFinished = false;
+				}
 				canvas.redraw();
-				await sleep(speed);
-				last = current;
+				await sleep(50);
 			}
 		}
 
@@ -125,6 +130,7 @@
 				this.j = j;
 				this.distance = distance;
 				this.visited = false;
+				this.parent = null;
 		  }
 
 			addCircle()
@@ -143,7 +149,7 @@
 				this.circle.fill = color;
 			}
 
-			markNeighbors()
+			seeNeighbors()
 			{
 				for (var m = this.i-1; m <= this.i+1; m++) {
 					for (var n = this.j-1; n <= this.j+1; n++)
@@ -151,11 +157,19 @@
 						if (m >= 0 && n >= 0 && n < rowLength && m < columnLength && !grid[m][n].visited)
 						{
 							var neighbor = grid[m][n];
+							neighbor.parent = this;
 							unvisited.enqueue(neighbor);
+							var newDistance = this.distance + 1;
+							neighbor.distance = Math.min(neighbor.distance, newDistance);
 							neighbor.addCircle();
+							canvas.redraw();
 						}
 					}
 				}
+				this.visited = true;
+				this.fillCircle("red");
+				unvisited.dequeue();
+				canvas.redraw();
 			}
 		}
 
