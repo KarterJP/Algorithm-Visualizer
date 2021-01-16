@@ -49,7 +49,7 @@
 				</div>
 				<div class="d-flex flex-row rounded-bottom" id="bottom-row">
 					<button class="control btn bg-danger btn-outline-dark mr-auto" id="reset" onclick="init();">Reset</button>
-          <p class="text-warning" id="instruction">Click and drag to place walls.</p>
+          <p class="text-warning" id="instruction">Click to place walls.</p>
 					<select class="form-control ml-auto" id="speed">
 						<option id="select-label" selected="selected">Speed</option>
 						<option value="slow">Slow</option>
@@ -90,8 +90,6 @@
 		{
 			running();
 			unvisited.push(beginning);
-			grid[2][5].toggleWall();
-			grid[3][4].toggleWall();
 
 			while (unvisited.size() > 0) {
 				if (!isRunning) { return; }
@@ -172,6 +170,19 @@
 				this.visited = false;
 				this.wall = false;
 				this.distance = Infinity;
+
+				this.cell = canvas.display.rectangle({
+					x: x,
+					y: y,
+					width: cellSize-1,
+					height: cellSize-1
+				});
+				canvas.addChild(this.cell);
+
+				var self = this;
+				this.cell.bind("click tap", function (e) {
+						self.toggleWall();
+				});
 		  }
 
 			addCircle()
@@ -196,9 +207,9 @@
 					for (var n = this.j-1; n <= this.j+1; n++) {
 						if (!(m == this.i && n == this.j) && m >= 0 && n >= 0 && n < rowLength && m < columnLength)
 						{
-							if (!grid[m][n].visited && !grid[m][n].wall)
+							var neighbor = grid[m][n];
+							if (!neighbor.visited && !neighbor.wall)
 							{
-								var neighbor = grid[m][n];
 								if (!unvisited.has(neighbor))
 								{
 									unvisited.push(neighbor);
@@ -224,22 +235,16 @@
 
 			toggleWall()
 			{
-				if (!this.wall)
+				if (!this.wall && !this.destination && this.distance == Infinity)
 				{
 					this.wall = true;
-					this.block = canvas.display.rectangle({
-						x: this.x,
-						y: this.y,
-						width: cellSize,
-						height: cellSize,
-						fill: colors.PRIMARY
-					});
-					canvas.addChild(this.block);
+					this.cell.fill = colors.PRIMARY;
 				}
 				else {
 					this.wall = false;
-					canvas.removeChild(this.block, true);
+					this.cell.fill = "";
 				}
+				canvas.redraw();
 			}
 
 			becomeBeginning()

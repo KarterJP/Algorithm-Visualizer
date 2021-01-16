@@ -211,8 +211,8 @@ function pathfindInit()
 	rowLength = grid[0].length;
 	columnLength = grid.length;
 
-	beginning = grid[2][2];
-	destination = grid[columnLength-2][rowLength-1];
+	beginning = grid[Math.floor(Math.random()*columnLength)][Math.floor(Math.random()*(rowLength/2-1))];
+	destination = grid[Math.floor(Math.random()*(columnLength/2))][Math.floor(Math.random()*(rowLength/2)+(rowLength/2))];
 
 	beginning.becomeBeginning();
 	destination.becomeDestination();
