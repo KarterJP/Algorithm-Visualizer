@@ -195,7 +195,9 @@ function sortInit()
 
 function pathfindInit()
 {
+	if (unvisited) { unvisited = new BinaryHeap(function(node){return node.distance}); };
 	path = [];
+	grid = [];
 	var i = 0;
 	for (var y = 100; y < canvas.height-cellSize; y+=cellSize) {
 		var j = 0;
