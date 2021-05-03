@@ -195,6 +195,7 @@ function sortInit()
 
 function pathfindInit()
 {
+	path = [];
 	var i = 0;
 	for (var y = 100; y < canvas.height-cellSize; y+=cellSize) {
 		var j = 0;
